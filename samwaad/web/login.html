@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Samwaad — Sign in</title>
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/static/vendor/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/css/glass.css">
+<link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body class="login-page">
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<main class="login">
+  <section class="hero">
+    <div class="brand-row">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="brand">Samwaad</span>
+      <span class="chip accent"><span class="indic" lang="hi">संवाद</span> · dialogue</span>
+    </div>
+    <h1>Every lecture.<br><span class="grad-text">Every language.</span><br>No internet.</h1>
+    <p class="lede">Live captions, instant translation into 11 Indian languages and an AI study kit — running entirely on your Snapdragon laptop's NPU.</p>
+    <div class="langs" aria-label="Languages">
+      <span lang="hi">हिन्दी</span><span lang="mr">मराठी</span><span lang="ta">தமிழ்</span><span lang="te">తెలుగు</span><span lang="bn">বাংলা</span>
+      <span lang="gu">ગુજરાતી</span><span lang="kn">ಕನ್ನಡ</span><span lang="ml">മലയാളം</span><span lang="pa">ਪੰਜਾਬੀ</span><span lang="or">ଓଡ଼ିଆ</span><span lang="ur">اردو</span>
+    </div>
+    <div class="feats">
+      <div class="feat glass thin"><i data-icon="mic"></i><b>Live captions</b><span>Whisper on the Hexagon NPU, word by word</span></div>
+      <div class="feat glass thin"><i data-icon="globe"></i><b>Translated live</b><span>OPUS-MT &amp; IndicTrans2, sentence by sentence</span></div>
+      <div class="feat glass thin"><i data-icon="sparkles"></i><b>Study kit</b><span>Summary, 3D flashcards, ask the lecture</span></div>
+    </div>
+  </section>
+
+  <div class="auth-wrap">
+    <div class="orb-anchor" id="orbAnchor"></div>
+    <section class="auth glass" data-lg data-bezel="30" data-refract="54" id="authCard" aria-labelledby="authTitle">
+      <div class="seg glass thin" role="tablist" id="modeSeg">
+        <span class="thumb"></span>
+        <button class="on" data-mode="login" role="tab" aria-selected="true">Sign in</button>
+        <button data-mode="register" role="tab" aria-selected="false">Create account</button>
+      </div>
+      <h2 id="authTitle">Welcome back</h2>
+      <p class="muted" id="authSub">Sign in to find your lectures, notes and flashcards.</p>
+      <form id="authForm" autocomplete="on" novalidate>
+        <label class="lbl reg-only" for="name">Your name</label>
+        <input class="field reg-only" id="name" name="name" placeholder="Anshul" autocomplete="name">
+        <label class="lbl" for="username">Username</label>
+        <input class="field" id="username" name="username" placeholder="anshul" autocomplete="username" required>
+        <label class="lbl" for="password">Password</label>
+        <div class="pw">
+          <input class="field" id="password" name="password" type="password" placeholder="At least 6 characters" autocomplete="current-password" required minlength="6">
+          <button type="button" class="btn ghost icon" id="pwToggle" aria-label="Show password"><i data-icon="eye"></i></button>
+        </div>
+        <p class="err" id="err" role="alert"></p>
+        <button class="btn primary big" id="submitBtn" type="submit">Sign in</button>
+      </form>
+      <div class="private"><i data-icon="lock"></i><span>Your account and notes live on <b>this laptop only</b>. Nothing is uploaded — ever.</span></div>
+    </section>
+  </div>
+</main>
+<div class="foot-note">Built for Snapdragon-powered HP AI PCs · runs 100% offline</div>
+
+<script type="module" src="/static/js/login.js"></script>
+</body>
+</html>
