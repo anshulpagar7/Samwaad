@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Samwaad</title>
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/static/vendor/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/css/glass.css">
+<link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body class="app">
+<a class="skip" href="#main">Skip to content</a>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="bg-anchor" id="bgAnchor" aria-hidden="true"></div>
+
+<div class="shell">
+  <!-- ============================================================ RAIL -->
+  <aside class="rail glass" data-lg data-bezel="22" aria-label="Main">
+    <div class="brand-row">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="brand">Samwaad<small>संवाद · offline classroom AI</small></span>
+    </div>
+    <nav class="nav">
+      <a href="#/home" data-nav="home"><i data-icon="home"></i><span class="lbl">Home</span></a>
+      <a href="#/live" data-nav="live"><i data-icon="mic"></i><span class="lbl">Live lecture</span><span class="live-dot"></span></a>
+      <a href="#/library" data-nav="library"><i data-icon="library"></i><span class="lbl">My lectures</span><span class="count" id="libCount"></span></a>
+      <div class="nav-sep"></div>
+      <a href="#/performance" data-nav="performance"><i data-icon="gauge"></i><span class="lbl">On-device AI</span></a>
+      <a href="#/settings" data-nav="settings"><i data-icon="settings"></i><span class="lbl">Settings</span></a>
+    </nav>
+    <div class="rail-spacer"></div>
+    <a class="npu-card glass thin" href="#/performance" style="text-decoration:none">
+      <div class="row"><span class="eyebrow">Running on</span></div>
+      <div class="chip-row"><span class="chip" id="epChip">…</span><span class="chip" id="netChip">…</span></div>
+      <small id="engines"></small>
+    </a>
+    <div class="me">
+      <div class="avatar" id="avatar" aria-hidden="true">·</div>
+      <div class="who"><b id="meName">…</b><span id="meUser"></span></div>
+      <button class="btn ghost icon sm" id="logoutBtn" title="Sign out" aria-label="Sign out"><i data-icon="logout"></i></button>
+    </div>
+  </aside>
+
+  <main class="views" id="main" tabindex="-1">
+    <!-- ========================================================== HOME -->
+    <section class="view" data-view="home" aria-labelledby="homeTitle">
+      <div class="vhead">
+        <div class="t"><div class="eyebrow" id="today"></div><h1 id="homeTitle">Home</h1></div>
+        <button class="search-trigger glass thin" data-cmdk><i data-icon="search"></i>Search lectures or jump to…<kbd>Ctrl K</kbd></button>
+      </div>
+      <div class="bento scroll" id="homeGrid"></div>
+    </section>
+
+    <!-- ========================================================== LIVE -->
+    <section class="view" data-view="live" aria-label="Live lecture">
+      <div class="live">
+        <div class="stage-col">
+          <div class="live-top" id="liveHead">
+            <input class="title-input" id="title" placeholder="Untitled lecture" maxlength="120" aria-label="Lecture title">
+            <span class="status-pill glass thin pill" role="status"><span class="rec"></span><span id="statusText">Ready</span><span class="timer" id="timer"></span></span>
+            <select class="field lang-select" id="lang" aria-label="Translate into"></select>
+          </div>
+          <div class="stage">
+            <div class="orb-slot" id="liveAnchor"></div>
+            <canvas class="ring" id="ring" aria-hidden="true"></canvas>
+            <div class="hint">Press <kbd>Space</kbd> or the button below to start · everything stays on this laptop</div>
+          </div>
+          <div class="now glass" data-lg aria-live="polite" aria-atomic="false">
+            <div id="nowCap"><div class="empty-cap">Captions appear here <b>as the teacher speaks</b> — English on top, your language below.</div></div>
+            <div class="tr-line indic" id="nowTr"></div>
+          </div>
+          <div class="pipe glass thin" id="pipe" aria-label="On-device AI pipeline"></div>
+          <div class="dock glass pill" data-lg data-bezel="20" data-refract="36">
+            <button class="btn ghost" id="demoBtn" title="Replay a recorded lecture as if it were live"><i data-icon="play"></i>Demo</button>
+            <button class="rec-btn" id="startBtn"><span class="rdot"></span><span id="startLbl">Start lecture</span></button>
+            <button class="btn ghost icon" id="projBtn" title="Projector mode (P)" aria-label="Projector mode"><i data-icon="expand"></i></button>
+            <button class="btn ghost icon" id="capDown" title="Smaller captions" aria-label="Smaller captions"><span style="font-size:13px;font-weight:700">A−</span></button>
+            <button class="btn ghost icon" id="capUp" title="Bigger captions" aria-label="Bigger captions"><span style="font-size:16px;font-weight:700">A+</span></button>
+          </div>
+        </div>
+        <aside class="side glass" data-lg aria-label="Transcript">
+          <div class="side-head"><span class="eyebrow">Transcript</span><span class="hearing" id="hearing" hidden><i></i><i></i><i></i></span><span class="chip" id="lineStat">0 lines</span></div>
+          <div class="feed" id="feed"><div class="feed-empty">Every sentence lands here with its translation,<br>and is saved to <b>My lectures</b> automatically.</div></div>
+          <button class="btn sm jump glass" id="jumpBtn"><i data-icon="down"></i>Jump to live</button>
+          <div class="side-foot">
+            <div class="mini-stat"><b id="mAsr">—</b><span>ASR ms</span></div>
+            <div class="mini-stat"><b id="mE2e">—</b><span>Caption ms</span></div>
+            <div class="mini-stat"><b id="mRtf">—</b><span>Real-time ×</span></div>
+          </div>
+        </aside>
+      </div>
+      <button class="btn glass proj-exit" id="projExit"><i data-icon="x"></i>Exit projector</button>
+    </section>
+
+    <!-- ========================================================== LIBRARY -->
+    <section class="view" data-view="library" aria-labelledby="libTitle">
+      <div class="vhead">
+        <div class="t"><div class="eyebrow">Library</div><h1 id="libTitle">My lectures</h1></div>
+        <button class="btn primary" onclick="location.hash='#/live'"><i data-icon="mic"></i>New lecture</button>
+      </div>
+      <div class="lib-tools">
+        <label class="search"><i data-icon="search"></i><input class="field glass thin" id="search" placeholder="Search titles and transcripts…" autocomplete="off" aria-label="Search lectures"></label>
+        <div class="seg glass thin" id="libFilter" role="tablist">
+          <span class="thumb"></span>
+          <button class="on" data-f="all">All</button><button data-f="starred">Starred</button><button data-f="kit">Study kit</button>
+        </div>
+        <select class="field" id="libSort" style="width:auto;height:40px;border-radius:999px" aria-label="Sort">
+          <option value="new">Newest</option><option value="old">Oldest</option><option value="long">Longest</option><option value="az">A → Z</option>
+        </select>
+      </div>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <!-- ========================================================== NOTE -->
+    <section class="view" data-view="note" aria-label="Lecture">
+      <div class="vhead">
+        <a class="btn icon" href="#/library" aria-label="Back to library"><i data-icon="back"></i></a>
+        <div class="t">
+          <div class="eyebrow" id="noteDate"></div>
+          <h1 class="note-title" id="noteTitle" contenteditable="true" spellcheck="false" aria-label="Lecture title (editable)"></h1>
+        </div>
+        <div class="stat-row" id="noteChips" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+        <button class="btn icon star-btn" id="noteStar" aria-label="Star lecture"><i data-icon="star"></i></button>
+        <a class="btn" id="exportBtn" download><i data-icon="download"></i>Export</a>
+        <button class="btn icon" id="deleteBtn" title="Delete lecture" aria-label="Delete lecture"><i data-icon="trash"></i></button>
+      </div>
+      <div class="note-grid">
+        <div class="panel glass" data-lg>
+          <div class="panel-head"><span class="eyebrow">Transcript</span><input class="field" id="tSearch" placeholder="Find in transcript…" aria-label="Find in transcript"></div>
+          <div class="kw" id="keywords"></div>
+          <div class="panel-body" id="transcript"></div>
+        </div>
+        <div class="panel glass" data-lg>
+          <div class="tabs glass thin pill" role="tablist">
+            <button class="tab on" data-tab="summary">Summary</button>
+            <button class="tab" data-tab="cards">Flashcards</button>
+            <button class="tab" data-tab="terms">Terms</button>
+            <button class="tab" data-tab="ask">Ask</button>
+          </div>
+          <div class="kit" id="kit"></div>
+          <form class="ask-bar" id="askForm" hidden>
+            <input class="field" id="q" placeholder="Ask this lecture anything…" autocomplete="off" aria-label="Question">
+            <button class="btn primary icon" aria-label="Ask"><i data-icon="message"></i></button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== PERFORMANCE -->
+    <section class="view" data-view="performance" aria-labelledby="perfTitle">
+      <div class="vhead">
+        <div class="t"><div class="eyebrow">Why a Snapdragon AI PC</div><h1 id="perfTitle">On-device AI</h1></div>
+        <button class="btn" id="perfRefresh"><i data-icon="refresh"></i>Refresh</button>
+      </div>
+      <div class="bento scroll" id="perfGrid"></div>
+    </section>
+
+    <!-- ========================================================== SETTINGS -->
+    <section class="view" data-view="settings" aria-labelledby="setTitle">
+      <div class="vhead"><div class="t"><div class="eyebrow">Preferences</div><h1 id="setTitle">Settings</h1></div></div>
+      <div class="settings scroll" id="settingsGrid"></div>
+    </section>
+  </main>
+</div>
+
+<!-- command palette -->
+<div class="cmdk-wrap" id="cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="cmdk glass">
+    <div class="in"><i data-icon="search"></i><input id="cmdkInput" placeholder="Type a command or search lectures…" autocomplete="off" aria-label="Command"></div>
+    <div class="list" id="cmdkList" role="listbox"></div>
+    <div class="foot"><span><kbd>↑</kbd> <kbd>↓</kbd> navigate</span><span><kbd>Enter</kbd> run</span><span><kbd>Esc</kbd> close</span></div>
+  </div>
+</div>
+
+<div class="tip" id="tip" role="tooltip"></div>
+<div id="toasts" aria-live="polite"></div>
+<script type="module" src="/static/js/app.js"></script>
+</body>
+</html>
