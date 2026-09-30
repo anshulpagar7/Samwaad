@@ -1,0 +1,9 @@
+# Optional extras
+#   CPU speech recognition (non-Snapdragon laptops, and the CPU side of the CPU-vs-NPU benchmark)
+faster-whisper>=1.0
+#   Best-quality translation for all 22 scheduled languages (CPU)
+torch>=2.2
+IndicTransToolkit
+#   Compiling / profiling your own models on Qualcomm AI Hub (needs a free API token)
+qai-hub
+qai-hub-models
