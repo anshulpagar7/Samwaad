@@ -1,0 +1,55 @@
+# Samwaad — Offline Classroom Companion
+# One config for every machine: "auto" picks the Snapdragon NPU when it's there and
+# falls back to CPU everywhere else. Override anything with  -o section.key=value
+
+runtime:
+  device: auto           # auto | npu | cpu   (npu = ONNX Runtime QNN Execution Provider, HTP backend)
+  qnn_backend: QnnHtp.dll
+  fallback_to_cpu: true  # a model QNN can't take runs on CPU instead of crashing
+
+audio:
+  sample_rate: 16000
+  block_ms: 32           # 512 samples @16k — Silero VAD frame size
+  device: null           # null = default mic; pick another in Settings or via `python -m samwaad devices`
+
+vad:
+  backend: silero        # silero | energy   (energy needs no model; used if the Silero file is missing)
+  model_path: models/silero_vad.onnx
+  threshold: 0.5
+  min_speech_ms: 300
+  min_silence_ms: 500    # pause length that ends a sentence
+  max_segment_s: 12      # force-cut long monologues so captions keep flowing
+  pad_ms: 150
+
+asr:
+  backend: auto             # auto | onnx-qnn (AI Hub Whisper) | faster-whisper (CPU) | script | mock
+  model: models/whisper_base   # AI Hub export folder (encoder + decoder), used by onnx-qnn
+  tokenizer: openai/whisper-base
+  cpu_model: base           # faster-whisper model used when the NPU export isn't present
+  language: en
+  beam_size: 1
+
+translate:
+  backend: hybrid           # hybrid | opus-onnx (NPU only) | indictrans2 (CPU only) | none | script | mock
+  npu_models: models/opus_mt                          # OPUS-MT exports (tools/export_opus_mt.py)
+  quality_model: ai4bharat/indictrans2-en-indic-dist-200M
+  prefer: npu               # npu = fastest (OPUS-MT on NPU where available) | quality = IndicTrans2 everywhere
+  target: hin_Deva
+
+llm:
+  backend: http             # http (Ollama / llama.cpp / LM Studio / AnythingLLM, OpenAI-compatible) | genie | extractive
+  url: http://127.0.0.1:11434/v1/chat/completions
+  model: llama3.2:3b
+  genie_config: models/llama_v3_2_3b_instruct/genie_config.json
+  max_tokens: 900
+  timeout_s: 180
+
+store:
+  dir: sessions            # lectures, one folder per account
+
+auth:
+  dir: data                # local accounts (hashed passwords) — never leaves this PC
+
+server:
+  host: 127.0.0.1
+  port: 8765
