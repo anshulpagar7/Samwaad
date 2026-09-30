@@ -1,0 +1,17 @@
+# Core — pure Python or native wheels for Windows on ARM64 (Snapdragon X) and x64.
+numpy>=1.26
+pyyaml>=6.0
+sounddevice>=0.4.6
+fastapi>=0.110
+uvicorn>=0.29
+websockets>=12.0
+psutil>=5.9
+onnxruntime>=1.18          # on Snapdragon the setup script adds onnxruntime-qnn (requirements-snapdragon.txt)
+transformers>=4.40         # tokenizers only (Whisper / OPUS-MT) — no PyTorch needed
+sentencepiece>=0.2
+qai_hub_models_cli         # `qai-hub-models fetch` — downloads Qualcomm's pre-compiled NPU models
+
+# Tests
+pytest
+httpx
+onnx
