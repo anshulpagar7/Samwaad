@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Inter, Segoe UI, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d1130"/><stop offset="1" stop-color="#070914"/></linearGradient>
+    <linearGradient id="npu" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a2f8f"/><stop offset="1" stop-color="#0f5f5a"/></linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2250"/><stop offset="1" stop-color="#141937"/></linearGradient>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8f9bff"/></marker>
+    <style>
+      .t{fill:#f3f5ff;font-size:15px;font-weight:650}
+      .s{fill:#aab2d6;font-size:12px}
+      .k{fill:#8f9bff;font-size:11px;font-weight:700;letter-spacing:1.4px}
+      .box{fill:url(#card);stroke:rgba(255,255,255,.16);stroke-width:1}
+      .npu{fill:#123a3a;stroke:#46d8c8;stroke-width:1.2}
+      .cpu{fill:#2a2440;stroke:#f5b25a;stroke-width:1.2}
+      .tag{font-size:10px;font-weight:800;letter-spacing:.8px}
+      .ln{stroke:#8f9bff;stroke-width:2;fill:none}
+    </style>
+  </defs>
+  <rect width="1200" height="640" rx="24" fill="url(#bg)"/>
+  <text x="40" y="52" fill="#fff" font-size="24" font-weight="750">Samwaad — everything runs on the Snapdragon AI PC</text>
+  <text x="40" y="78" class="s">One process, 127.0.0.1 only. No network calls after setup. Every model is opened through ONNX Runtime; the QNN Execution Provider places it on the Hexagon NPU.</text>
+
+  <!-- live path -->
+  <text x="40" y="122" class="k">LIVE PATH  ·  PER SENTENCE</text>
+  <g>
+    <rect class="box" x="40" y="136" width="170" height="92" rx="16"/>
+    <text x="58" y="168" class="t">Microphone</text><text x="58" y="190" class="s">or system audio</text><text x="58" y="210" class="s">16 kHz · 32 ms blocks</text>
+
+    <rect class="box" x="250" y="136" width="170" height="92" rx="16"/>
+    <text x="268" y="168" class="t">Silero VAD</text><text x="268" y="190" class="s">splits sentences</text><text x="268" y="210" class="s">0.1 ms / frame</text>
+    <rect class="cpu" x="370" y="126" width="42" height="20" rx="10"/><text x="380" y="140" class="tag" fill="#ffd29a">CPU</text>
+
+    <rect class="box" x="460" y="136" width="210" height="92" rx="16"/>
+    <text x="478" y="168" class="t">Whisper Base</text><text x="478" y="190" class="s">AI Hub encoder + decoder</text><text x="478" y="210" class="s">45 ms + 3.8 ms/token (X Elite)</text>
+    <rect class="npu" x="620" y="126" width="42" height="20" rx="10"/><text x="630" y="140" class="tag" fill="#bff6ef">NPU</text>
+
+    <rect class="box" x="710" y="136" width="220" height="92" rx="16"/>
+    <text x="728" y="168" class="t">Translation (hybrid)</text><text x="728" y="190" class="s">OPUS-MT en→hi/mr/dra/inc</text><text x="728" y="210" class="s">IndicTrans2 for best quality</text>
+    <rect class="npu" x="836" y="126" width="42" height="20" rx="10"/><text x="846" y="140" class="tag" fill="#bff6ef">NPU</text>
+    <rect class="cpu" x="882" y="126" width="42" height="20" rx="10"/><text x="892" y="140" class="tag" fill="#ffd29a">CPU</text>
+
+    <rect class="box" x="970" y="136" width="190" height="92" rx="16"/>
+    <text x="988" y="168" class="t">Live UI</text><text x="988" y="190" class="s">captions over WebSocket</text><text x="988" y="210" class="s">audio ring · pipeline view</text>
+    <path class="ln" marker-end="url(#a)" d="M210 182H246"/><path class="ln" marker-end="url(#a)" d="M420 182H456"/>
+    <path class="ln" marker-end="url(#a)" d="M670 182H706"/><path class="ln" marker-end="url(#a)" d="M930 182H966"/>
+  </g>
+
+  <!-- store + study -->
+  <text x="40" y="282" class="k">AFTER CLASS</text>
+  <rect class="box" x="40" y="296" width="300" height="104" rx="16"/>
+  <text x="58" y="328" class="t">Lecture library (per account)</text><text x="58" y="350" class="s">JSONL + Markdown on this laptop</text><text x="58" y="370" class="s">search · star · export · delete</text><text x="58" y="388" class="s">local accounts · PBKDF2 · HttpOnly cookies</text>
+  <rect class="box" x="380" y="296" width="330" height="104" rx="16"/>
+  <text x="398" y="328" class="t">Study kit + Ask the lecture</text><text x="398" y="350" class="s">Llama 3.2 3B via Genie — 11 tok/s (X Elite)</text><text x="398" y="370" class="s">summary · key points · 3D flashcards · terms</text><text x="398" y="388" class="s">offline extractive fallback, always works</text>
+  <rect class="npu" x="660" y="286" width="42" height="20" rx="10"/><text x="670" y="300" class="tag" fill="#bff6ef">NPU</text>
+  <rect class="box" x="750" y="296" width="410" height="104" rx="16"/>
+  <text x="768" y="328" class="t">Metrics &amp; system check</text><text x="768" y="350" class="s">per-stage latency · caption latency · real-time factor</text><text x="768" y="370" class="s">CPU % · battery drain (psutil) · which model runs where</text><text x="768" y="388" class="s">`samwaad doctor` + Settings → System check</text>
+  <path class="ln" marker-end="url(#a)" d="M1065 228V270H190V292"/>
+
+  <!-- runtime band -->
+  <rect x="40" y="440" width="1120" height="150" rx="20" fill="url(#npu)" opacity=".9"/>
+  <text x="64" y="474" fill="#fff" font-size="17" font-weight="720">runtime.py — the single CPU ⇄ NPU switch</text>
+  <text x="64" y="500" fill="#d8fffb" font-size="13">device: auto → onnxruntime-qnn 2.x plugin EP (registered at start-up) or 1.x built-in QNNExecutionProvider, HTP backend,</text>
+  <text x="64" y="520" fill="#d8fffb" font-size="13">burst performance mode, fp16 precision on HTP. Anything QNN can't load falls back to CPU instead of crashing — and the UI says so.</text>
+  <text x="64" y="552" fill="#bff6ef" font-size="12.5">Models: Whisper pre-compiled by Qualcomm AI Hub (qai-hub-models fetch) + our OPUS-MT exports via AI Hub's opus_mt recipe.</text>
+  <text x="64" y="572" fill="#bff6ef" font-size="12.5">Static shapes (Whisper decode length 200, Marian 256) suit the HTP. AI Hub profiles: 100% of Whisper Base layers on the NPU.</text>
+</svg>
