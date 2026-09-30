@@ -1,0 +1,41 @@
+{
+  "note": "Scripted stand-in for UI demos without models (python -m samwaad --demo app). Hindi, Marathi and Tamil lines are hand-written translations.",
+  "lines": [
+    {
+      "en": "Today we are going to understand how the Raft consensus algorithm keeps a cluster in agreement.",
+      "hin_Deva": "आज हम समझेंगे कि राफ्ट सहमति एल्गोरिदम एक क्लस्टर को कैसे एकमत रखता है।",
+      "tam_Taml": "ராஃப்ட் ஒருமித்த வழிமுறை ஒரு கிளஸ்டரை எவ்வாறு ஒத்திசைவில் வைத்திருக்கிறது என்பதை இன்று புரிந்துகொள்வோம்.",
+      "mar_Deva": "आज आपण समजून घेणार आहोत की राफ्ट सहमती अल्गोरिदम क्लस्टरला एकमतात कसे ठेवतो."
+    },
+    {
+      "en": "Every server starts as a follower and waits to hear from a leader.",
+      "hin_Deva": "हर सर्वर एक फॉलोअर के रूप में शुरू होता है और लीडर का इंतज़ार करता है।",
+      "tam_Taml": "ஒவ்வொரு சர்வரும் பின்தொடர்பவராகத் தொடங்கி, தலைவரிடமிருந்து செய்திக்காகக் காத்திருக்கிறது.",
+      "mar_Deva": "प्रत्येक सर्व्हर फॉलोअर म्हणून सुरू होतो आणि लीडरकडून संदेशाची वाट पाहतो."
+    },
+    {
+      "en": "If the election timeout expires, the follower becomes a candidate and asks the others for votes.",
+      "hin_Deva": "अगर चुनाव का टाइमआउट खत्म हो जाए, तो फॉलोअर उम्मीदवार बन जाता है और बाकी सर्वरों से वोट माँगता है।",
+      "tam_Taml": "தேர்தல் நேரம் முடிந்தால், பின்தொடர்பவர் வேட்பாளராக மாறி மற்றவர்களிடம் வாக்குகளைக் கேட்கிறார்.",
+      "mar_Deva": "निवडणुकीचा टाइमआउट संपला, तर फॉलोअर उमेदवार बनतो आणि इतरांकडे मते मागतो."
+    },
+    {
+      "en": "A candidate that receives votes from a majority becomes the new leader for that term.",
+      "hin_Deva": "जिस उम्मीदवार को बहुमत के वोट मिलते हैं, वह उस टर्म का नया लीडर बन जाता है।",
+      "tam_Taml": "பெரும்பான்மை வாக்குகளைப் பெறும் வேட்பாளர் அந்தக் காலத்திற்கான புதிய தலைவராகிறார்.",
+      "mar_Deva": "ज्या उमेदवाराला बहुमताची मते मिळतात, तो त्या टर्मसाठी नवीन लीडर बनतो."
+    },
+    {
+      "en": "The leader then replicates log entries to every follower and commits them once a majority acknowledges.",
+      "hin_Deva": "इसके बाद लीडर हर फॉलोअर को लॉग एंट्री भेजता है और बहुमत की पुष्टि मिलते ही उन्हें कमिट करता है।",
+      "tam_Taml": "பின்னர் தலைவர் பதிவு உள்ளீடுகளை ஒவ்வொரு பின்தொடர்பவருக்கும் நகலெடுத்து, பெரும்பான்மை ஒப்புக்கொண்டதும் அவற்றை உறுதிசெய்கிறார்.",
+      "mar_Deva": "त्यानंतर लीडर प्रत्येक फॉलोअरकडे लॉग एंट्री पाठवतो आणि बहुमताने पुष्टी केल्यावर त्या कमिट करतो."
+    },
+    {
+      "en": "This safety property means a committed entry is never lost, even if the leader crashes.",
+      "hin_Deva": "इस सुरक्षा गुण का मतलब है कि कमिट की गई एंट्री कभी नहीं खोती, भले ही लीडर क्रैश हो जाए।",
+      "tam_Taml": "இந்தப் பாதுகாப்புப் பண்பின் பொருள், தலைவர் செயலிழந்தாலும் உறுதிசெய்யப்பட்ட உள்ளீடு ஒருபோதும் இழக்கப்படாது.",
+      "mar_Deva": "या सुरक्षितता गुणधर्माचा अर्थ असा की लीडर क्रॅश झाला तरी कमिट केलेली एंट्री कधीही हरवत नाही."
+    }
+  ]
+}
