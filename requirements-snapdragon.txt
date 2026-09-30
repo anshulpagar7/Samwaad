@@ -1,0 +1,5 @@
+# Snapdragon X (Windows on ARM64) — puts every model on the Hexagon NPU.
+# Matches the tool versions Qualcomm AI Hub validated the pre-compiled Whisper assets with
+# (onnxruntime 1.27 / QAIRT 2.50). The QNN EP ships as a plugin that Samwaad registers at start-up.
+onnxruntime>=1.27
+onnxruntime-qnn>=2.6
