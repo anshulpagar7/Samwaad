@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "samwaad"
+version = "1.0.0"
+description = "Offline classroom companion for Snapdragon AI PCs — live captions, Indian-language translation and a study kit, all on the NPU."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Anshul Pagar" }]
+dependencies = [
+  "numpy>=1.26", "pyyaml>=6.0", "sounddevice>=0.4.6", "fastapi>=0.110", "uvicorn>=0.29", "websockets>=12.0",
+  "psutil>=5.9", "onnxruntime>=1.18", "transformers>=4.40", "sentencepiece>=0.2",
+]
+
+[project.optional-dependencies]
+snapdragon = ["onnxruntime>=1.27", "onnxruntime-qnn>=2.6"]
+cpu = ["faster-whisper>=1.0"]
+quality = ["torch>=2.2", "IndicTransToolkit"]
+aihub = ["qai-hub", "qai-hub-models", "qai_hub_models_cli"]
+dev = ["pytest", "httpx", "onnx"]
+
+[project.scripts]
+samwaad = "samwaad.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["samwaad*"]
+
+[tool.setuptools.package-data]
+samwaad = ["web/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
